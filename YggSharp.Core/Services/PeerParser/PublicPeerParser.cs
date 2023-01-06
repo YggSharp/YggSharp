@@ -2,21 +2,20 @@
 using HtmlAgilityPack;
 using YggSharp.Core.Models.Peer;
 
-namespace YggSharp.Core.PeerParser;
+namespace YggSharp.Core.Services.PeerParser;
 
 public class PublicPeerParser : IPeerParser
 {
-    public const string PublicPeerSource = "https://publicpeers.neilalexander.dev/";
+    private const string PublicPeerSource = "https://publicpeers.neilalexander.dev/";
 
     private HttpClient _httpClient = new();
 
-    public async Task<List<Peer>> GetPeers()
+    public async IAsyncEnumerable<Peer> GetPeers()
     {
         var web = new HtmlWeb();
         var doc = await web.LoadFromWebAsync(PublicPeerSource);
         var peerTable = doc.DocumentNode.SelectSingleNode("//body/table");
         var currentRegion = "unknown";
-        var peers = new List<Peer>();
         
         foreach (var peerTableChildNode in peerTable.ChildNodes)
         {
@@ -35,8 +34,8 @@ public class PublicPeerParser : IPeerParser
                 peer.ReliabilityString = reliabilityNode.InnerText;
                 peer.Version = WebUtility.HtmlDecode(versionNode.InnerText);
                 peer.Region = currentRegion;
-                
-                peers.Add(peer);
+
+                yield return peer;
             }
             else
             {
@@ -48,9 +47,6 @@ public class PublicPeerParser : IPeerParser
                     currentRegion = countryNode.InnerText;
                 }
             }
-            
         }
-
-        return peers;
     }
 }
