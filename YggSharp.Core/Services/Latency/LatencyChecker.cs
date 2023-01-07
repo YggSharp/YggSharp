@@ -2,14 +2,14 @@
 using System.Net.Sockets;
 using YggSharp.Core.Models.Peer;
 
-namespace YggSharp.Core.LatencyCheckerService;
+namespace YggSharp.Core.Services.Latency;
 
 public class LatencyChecker : ILatencyChecker
 {
-    public const int DegreeOfParallelism = 16;
-    public const int PeerTimeout = 1000;
+    private const int DegreeOfParallelism = 16;
+    private const int PeerTimeout = 1000;
     
-    public Task CheckLatency(List<Peer> peers)
+    public Task CheckAndFillLatency(IEnumerable<Peer> peers)
     {
         peers.AsParallel()
             .WithDegreeOfParallelism(DegreeOfParallelism)
@@ -19,7 +19,7 @@ public class LatencyChecker : ILatencyChecker
         
     }
 
-    public static void CheckPeer(Peer peer)
+    private static void CheckPeer(Peer peer)
     {
         try
         {
