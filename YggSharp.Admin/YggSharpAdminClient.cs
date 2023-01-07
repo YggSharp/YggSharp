@@ -12,7 +12,7 @@ using YggSharp.Admin.Requests.RemovePeer;
 
 namespace YggSharp.Admin;
 
-public class YggSharpAdminClient
+public class YggSharpAdminClient : IYggSharpAdminClient
 {
     private readonly IPAddress _ipAddress;
     private readonly ushort _port;
