@@ -8,7 +8,8 @@ public class Peer
     public Reliability Reliability { get; set; }
     public string Region { get; set; }
 
-    public long? Latency { get; set; }
+    [JsonIgnore]
+    public PeerLatency? Latency { get; set; }
     
     public string ReliabilityString
     {
