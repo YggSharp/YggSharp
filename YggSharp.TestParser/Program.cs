@@ -1,7 +1,7 @@
 ﻿using YggSharp.Core.Services.Latency;
-using YggSharp.Core.Services.PeerParser;
+using YggSharp.Core.Services.Peers;
 
-var parser = new PublicPeerParser();
+var parser = new PublicPeerProvider();
 var latCheck = new LatencyChecker() as ILatencyChecker;
 
 var peers = parser.GetPeers().ToBlockingEnumerable().ToArray();

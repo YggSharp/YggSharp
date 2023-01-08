@@ -2,7 +2,7 @@
 
 namespace YggSharp.Core.Models.Peer;
 
-public class Peer
+public class Peer : IEquatable<Peer>
 {
     public Uri Uri { get; set; }
     public string Version { get; set; }
@@ -15,10 +15,7 @@ public class Peer
     
     public string ReliabilityString
     {
-        get
-        {
-            return Reliability.ToString().ToLowerInvariant();
-        }
+        get => Reliability.ToString().ToLowerInvariant();
 
         set
         {
@@ -32,5 +29,45 @@ public class Peer
                 _ => Reliability.Other
             };
         }
+    }
+
+    public bool Equals(Peer? other)
+    {
+        if (ReferenceEquals(null, other))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return Uri.Equals(other.Uri);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, obj))
+        {
+            return true;
+        }
+
+        if (obj.GetType() != this.GetType())
+        {
+            return false;
+        }
+
+        return Equals((Peer)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Uri.GetHashCode();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using YggSharp.Core.Models.Peer;
 
-namespace YggSharp.Core.Services.PeerParser;
+namespace YggSharp.Core.Services.Peers;
 
-public interface IPeerParser
+public interface IPeerProvider
 {
     IAsyncEnumerable<Peer> GetPeers();
 }

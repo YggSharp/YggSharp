@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="CliWrap" Version="3.6.0" />
       <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Octokit" Version="4.0.3" />
       <PackageReference Include="PInvoke.AdvApi32" Version="0.7.124" />
       <PackageReference Include="PInvoke.Kernel32" Version="0.7.124" />

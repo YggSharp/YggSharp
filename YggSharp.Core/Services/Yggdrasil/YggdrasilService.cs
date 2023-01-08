@@ -5,7 +5,7 @@ using YggSharp.Admin;
 
 namespace YggSharp.Core.Services.Yggdrasil;
 
-public class YggdrasilService
+public class YggdrasilService : IYggdrasilService
 {
     private const string RepoOwner = "yggdrasil-network";
     private const string RepoName = "yggdrasil-go";

@@ -2,9 +2,9 @@
 using HtmlAgilityPack;
 using YggSharp.Core.Models.Peer;
 
-namespace YggSharp.Core.Services.PeerParser;
+namespace YggSharp.Core.Services.Peers;
 
-public class PublicPeerParser : IPeerParser
+public class PublicPeerProvider : IPeerProvider
 {
     private const string PublicPeerSource = "https://publicpeers.neilalexander.dev/";
 

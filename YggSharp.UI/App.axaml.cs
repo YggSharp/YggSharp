@@ -1,6 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
+using Splat;
+using YggSharp.Core.Services;
+using YggSharp.UI.Misc;
 using YggSharp.UI.ViewModels;
 using YggSharp.UI.Views;
 
@@ -15,14 +19,30 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var services = SetupDI();
+        var dependencyResolver = new MsDependencyResolver(services);
+        
+        Locator.SetLocator(dependencyResolver);
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+            desktop.MainWindow = Locator.Current.GetService<MainWindow>();
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static IServiceCollection SetupDI()
+    {
+        var container = new ServiceCollection();
+
+        container.AddSingleton(new MainWindow
+        {
+            DataContext = new MainWindowViewModel()
+        });
+
+        container.AddYggdrasilServices();
+        
+        return container;
     }
 }
