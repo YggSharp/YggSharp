@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using ReactiveUI;
 using Splat;
 using YggSharp.Admin;
@@ -9,8 +10,8 @@ namespace YggSharp.UI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private readonly IYggdrasilService _yggdrasil = Locator.Current.GetService<IYggdrasilService>();
-    private readonly IYggSharpAdminClient _yggSharpAdmin = Locator.Current.GetService<IYggSharpAdminClient>();
+    private static readonly IYggdrasilService Yggdrasil = Locator.Current.GetService<IYggdrasilService>();
+    private static readonly IYggSharpAdminClient YggSharpAdmin = Locator.Current.GetService<IYggSharpAdminClient>();
     
     #region Window Properties
     private string _loadingStatus = "status";
@@ -20,11 +21,12 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _loadingStatus, value);
     }
     #endregion
-    
+
     public async Task Initialize()
     {
         LoadingStatus = "Connecting to Yggdrasil Service socket";
-        var socketConnected = await _yggSharpAdmin.Connect(default);
+
+        var socketConnected = await YggSharpAdmin.Connect(default);
         
         if(socketConnected)
         {

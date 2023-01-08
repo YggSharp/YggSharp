@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Splat;
-using YggSharp.Admin;
 using YggSharp.Core.Services.Yggdrasil;
 using YggSharp.UI.ViewModels;
 
@@ -30,6 +26,6 @@ public partial class MainWindow : WindowWithDataContext<MainWindowViewModel>
 
     private async void Window_OnOpened(object? sender, EventArgs e)
     {
-        await CastedDataContext.Initialize();
+        Task.Run(CastedDataContext.Initialize);
     }
 }
