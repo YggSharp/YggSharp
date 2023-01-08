@@ -3,16 +3,16 @@
         xmlns:vm="using:YggSharp.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
         x:Class="YggSharp.UI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="YggSharp Launcher"
-        Height="450"
-        Width="300"
+        Width="400"
+        Height="95"
         CanResize="False"
         SystemDecorations="Full"
         WindowStartupLocation="CenterScreen"
-        PointerPressed="InputElement_OnPointerPressed">
+        PointerPressed="InputElement_OnPointerPressed"
+        Opened="Window_OnOpened">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -20,10 +20,10 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="Yggdrasil" FontSize="24" FontWeight="DemiBold" Foreground="LightGreen"/>
-        <TextBlock Text="status text" HorizontalAlignment="Center"/>
-        <Button HorizontalAlignment="Center" Content="Cancel"/>
+    <StackPanel Orientation="Vertical" Margin="15">
+        <TextBlock Text="Yggdrasil" FontSize="24" FontWeight="DemiBold" Foreground="#5168f3"/>
+        <TextBlock Text="{Binding LoadingStatus}"/>
+        <ProgressBar Height="15"/>
     </StackPanel>
     
     
