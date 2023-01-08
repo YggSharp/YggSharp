@@ -2,7 +2,7 @@
 using YggSharp.Core.Services.PeerParser;
 
 var parser = new PublicPeerParser();
-var latCheck = new LatencyChecker();
+var latCheck = new LatencyChecker() as ILatencyChecker;
 
 var peers = parser.GetPeers().ToBlockingEnumerable().ToArray();
 

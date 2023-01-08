@@ -8,8 +8,6 @@ public class PublicPeerParser : IPeerParser
 {
     private const string PublicPeerSource = "https://publicpeers.neilalexander.dev/";
 
-    private HttpClient _httpClient = new();
-
     public async IAsyncEnumerable<Peer> GetPeers()
     {
         var web = new HtmlWeb();

@@ -1,4 +1,6 @@
-﻿namespace YggSharp.Core.Models.Peer;
+﻿using System.Text.Json.Serialization;
+
+namespace YggSharp.Core.Models.Peer;
 
 public class Peer
 {
